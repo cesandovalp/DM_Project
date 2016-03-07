@@ -35,5 +35,10 @@ for(i in 1:length(categories))
   setwd(categories.names[i])
   #print(getwd())
   download.file(categories[[i]], destfile = "file.html")
+  file.html = readLines("file.html")
+  p1 = regexpr('.pdf.*', home.html, TRUE)
+  p2 = p1 + attr(p1, "match.length") - 1
+  str_match = substr(home.html, p1, p2)
+  print(str_match)
   setwd("../")
 }
