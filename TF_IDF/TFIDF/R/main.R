@@ -1,8 +1,8 @@
 main = function()
 {
-  document = c("/home/cristian/Documents/MDA/TF_IDF/Test/1.pdf",
-               "/home/cristian/Documents/MDA/TF_IDF/Test/2.pdf",
-               "/home/cristian/Documents/MDA/TF_IDF/Test/3.pdf")
+  document = c("/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/1.pdf",
+               "/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/2.pdf",
+               "/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/3.pdf")
 
   result = list()
 
@@ -18,7 +18,7 @@ main = function()
   {
     for(t in term)
     {
-      t = 0
+      print(d)
     }
   }
 

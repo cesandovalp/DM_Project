@@ -4,7 +4,7 @@ pdf.vector = function(path)
   noise   = c("[\t\n\r\f\b\v]+", "([0-9])", "\\.", "\\+", "\\-", "\\/",
               "\\*", "\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\,",
               "\\%", "\\&", "\\=", "\\?", "\\|", "\\!", "\\\\", "\\:",
-              "\\;")
+              "\\;", "<", ">")
 
   read_function = readPDF()
   data          = read_function(elem=list(uri=path),language="en",id="id1")
@@ -34,12 +34,12 @@ pdf.vector = function(path)
   frequency_table
 }
 
-max.table = function(data)
+max_table = function(data)
 {
   names(which(data == max(data)))
 }
 
-min.table = function(data)
+min_table = function(data)
 {
   names(which(data == min(data)))
 }
