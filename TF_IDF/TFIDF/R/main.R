@@ -39,6 +39,5 @@ main = function()
 
   tf_idf_mat = tf_idf(frequency_mat, tid)
 
-#  list(term, frequency_mat, tid)
   tf_idf_mat
 }
