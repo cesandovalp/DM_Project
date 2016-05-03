@@ -12,6 +12,7 @@ pdf.vector = function(path)
   stopwords.l   = strsplit(stopwords.l, split=",")
   data          = data$content
   review_text   = paste(data, collapse = " ")
+  str_replace_all(review_text, "[^[:alnum:]]", " ")
 
   for( i in noise ) { review_text = gsub(i, " ", review_text) }
 
