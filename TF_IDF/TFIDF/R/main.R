@@ -37,5 +37,5 @@ main = function()
 
   result2 = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)
 
-  list(term, result2)
+  list(term, result2, tid)
 }
