@@ -6,14 +6,14 @@
 using namespace Rcpp;
 
 // k_means
-NumericMatrix k_means(NumericMatrix clusters, NumericMatrix tf_idf);
-RcppExport SEXP TFIDF_k_means(SEXP clustersSEXP, SEXP tf_idfSEXP) {
+NumericMatrix k_means(NumericMatrix centroid, NumericMatrix tf_idf);
+RcppExport SEXP TFIDF_k_means(SEXP centroidSEXP, SEXP tf_idfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericMatrix >::type clusters(clustersSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type centroid(centroidSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type tf_idf(tf_idfSEXP);
-    __result = Rcpp::wrap(k_means(clusters, tf_idf));
+    __result = Rcpp::wrap(k_means(centroid, tf_idf));
     return __result;
 END_RCPP
 }
