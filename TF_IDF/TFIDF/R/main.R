@@ -21,7 +21,7 @@ main = function()
   {
     for( t in 1:length(term) )
     {
-      if( is.null(tid[t]) ) { tid[t] = 0 }
+      if( is.null(tid[t]) || is.na(tid[t]) ) { tid[t] = 0 }
 
       if( is.na(result1[[d]][term[t]]) )
       {
@@ -35,7 +35,10 @@ main = function()
     result2[[d]] = result2[[d]][-1]
   }
 
-  result2 = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)
+  frequency_mat = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)
 
-  list(term, result2, tid)
+  tf_idf_mat = tf_idf(frequency_mat, tid)
+
+#  list(term, frequency_mat, tid)
+  tf_idf_mat
 }
