@@ -21,7 +21,7 @@ main = function()
   {
     for( t in 1:length(term) )
     {
-      tid[t] = 0
+      if( is.na(tid[t]) ) { tid[t] = 0 }
 
       if( is.na(result1[[d]][term[t]]) )
       {
