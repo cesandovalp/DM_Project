@@ -1,12 +1,9 @@
 #include <Rcpp.h>
 #include <math.h>
-//#include <iostream>
 #include <omp.h>
 
 // [[Rcpp::plugins(openmp)]]
 using namespace Rcpp;
-// using std::cout;
-// using std::endl;
 
 /**********************************************************
 _____FREQUENCY_____|_____TF-IDF______|_____Cosine_____
@@ -33,7 +30,7 @@ NumericMatrix tf_idf(NumericMatrix raw_frequency, NumericVector tid)
 {
   NumericMatrix result(raw_frequency.nrow(), raw_frequency.ncol());
 
-  omp_set_num_threads(2);
+  omp_set_num_threads(32);
   #pragma omp parallel for
   for(int document = 0; document < raw_frequency.nrow(); ++document)
   {

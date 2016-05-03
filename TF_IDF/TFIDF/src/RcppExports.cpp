@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// k_means
+NumericMatrix k_means(NumericMatrix clusters, NumericMatrix tf_idf);
+RcppExport SEXP TFIDF_k_means(SEXP clustersSEXP, SEXP tf_idfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type clusters(clustersSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type tf_idf(tf_idfSEXP);
+    __result = Rcpp::wrap(k_means(clusters, tf_idf));
+    return __result;
+END_RCPP
+}
 // tf_idf
 NumericMatrix tf_idf(NumericMatrix raw_frequency, NumericVector tid);
 RcppExport SEXP TFIDF_tf_idf(SEXP raw_frequencySEXP, SEXP tidSEXP) {
