@@ -1,30 +1,37 @@
 main = function()
 {
-  document = c("/home/cristian/Documents/DM_Project/TF_IDF/Test/1.pdf",
-               "/home/cristian/Documents/DM_Project/TF_IDF/Test/2.pdf",
-               "/home/cristian/Documents/DM_Project/TF_IDF/Test/3.pdf",
-               "/home/cristian/Documents/DM_Project/TF_IDF/Test/4.pdf")
+  document = c("/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/1.pdf",
+               "/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/2.pdf",
+               "/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/3.pdf")
 
-  result = list()
+  result1 = list()
+  result2 = list()
 
   term = c()
 
   for( d in 1:length(document) )
   {
-    result[[d]] = pdf.vector( document[d] )
-    term        = join.aux( term, result[[d]] )
+    result1[[d]] = pdf.vector( document[d] )
+    result2[[d]] = c(0)
+    term        = join.aux( term, result1[[d]] )
   }
 
-  for( d in result )
+  for( d in 1:length(result1) )
   {
     for( t in term )
     {
-      if( is.na(d[t]) )
+      if( is.na(result1[[d]][t]) )
       {
-        d[t] = 0
+        result2[[d]][t] = 0
+      }else
+      {
+        result2[[d]][t] = result1[[d]][t]
       }
     }
+    result2[[d]] = result2[[d]][-1]
   }
 
-  list(term, result)
+  result2 = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)
+
+  list(term, result2)
 }
