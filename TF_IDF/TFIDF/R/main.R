@@ -8,6 +8,7 @@ main = function()
   result2 = list()
 
   term = c()
+  tid = c()
 
   for( d in 1:length(document) )
   {
@@ -18,14 +19,14 @@ main = function()
 
   for( d in 1:length(result1) )
   {
-    for( t in term )
+    for( t in 1:length(term) )
     {
-      if( is.na(result1[[d]][t]) )
+      if( is.na(result1[[d]][term[t]]) )
       {
-        result2[[d]][t] = 0
+        result2[[d]][term[t]] = 0
       }else
       {
-        result2[[d]][t] = result1[[d]][t]
+        result2[[d]][term[t]] = result1[[d]][term[t]]
       }
     }
     result2[[d]] = result2[[d]][-1]
