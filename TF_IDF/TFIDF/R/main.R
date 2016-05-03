@@ -21,12 +21,15 @@ main = function()
   {
     for( t in 1:length(term) )
     {
+      tid[t] = 0
+
       if( is.na(result1[[d]][term[t]]) )
       {
         result2[[d]][term[t]] = 0
       }else
       {
         result2[[d]][term[t]] = result1[[d]][term[t]]
+        tid[t] = tid[t] + 1
       }
     }
     result2[[d]] = result2[[d]][-1]
