@@ -117,3 +117,10 @@ generate_directories = function()
 
   pdf.index
 }
+
+generate.example_dirs = function()
+{
+  c("/home/cesandovalp/Documents/MDA/DM_Project/TF_IDF/Test/1.pdf",
+    "/home/cesandovalp/Documents/MDA/DM_Project/TF_IDF/Test/2.pdf",
+    "/home/cesandovalp/Documents/MDA/DM_Project/TF_IDF/Test/3.pdf")
+}

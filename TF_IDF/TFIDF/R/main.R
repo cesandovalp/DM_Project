@@ -4,7 +4,6 @@ main = function(document)
   result2 = list()
 
   term = c()
-  tid  = c()
 
   no_cores = detectCores() - 1
   cl       = makeCluster(no_cores, type = "FORK")
@@ -12,18 +11,33 @@ main = function(document)
 
   for( d in 1:length(document) )
   {
-    result2[[d]] = c(0)
-    term         = join.aux( term, result1[[d]] )
+#    result2[[d]] = c(0)
+    term = join.aux( term, result1[[d]] )
   }
 
-#  stop(length(term))
+  term = sort(term)
 
-  for( d in 1:length(result1) )
+#  print(length(term))
+
+  temp_fun = function(x)
   {
-#    print(document[d])
-#    print(length(term))
-    result2[[d]][term[which(!term %in% names(document[d]))]] = 0
+    result = x
+    result[term[which(!term %in% names(x))]] = 0
+    result[sort(names(result))]
   }
+
+  cl      = makeCluster(no_cores, type = "FORK")
+  result2 = parLapply(cl, result1, temp_fun)
+
+  tid = result2[[1]]
+  print(max(result2[[1]]))
+  print(max(result2[[2]]))
+  print(max(result2[[3]]))
+
+  for(i in 2:length(document)) { tid = tid + result2[[i]]}
+
+  #print(tid)
+  print(max(tid))
 
   frequency_mat = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)
 
