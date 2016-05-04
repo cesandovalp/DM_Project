@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <iostream>
 #include <omp.h>
 
 using namespace Rcpp;
@@ -37,7 +38,8 @@ NumericMatrix k_means(NumericMatrix centroid, NumericMatrix tf_idf)
       point_to_centroid[c] = distance(centroid, point);
     }
 
-    double min = min(point_to_centroid);
+    double min = 0;
+    std::cout << *(std::min_element(point_to_centroid.begin(), point_to_centroid.end())) << std::endl;
     int index;
 
     for(int i = 0; i < centroid.nrow(); i++)
@@ -48,7 +50,6 @@ NumericMatrix k_means(NumericMatrix centroid, NumericMatrix tf_idf)
         break;
       }
     }
-    
     centroid(index, counter[index]++) = document;
   }
 }

@@ -60,7 +60,7 @@ join.aux = function(a, b)
   union(a, names(b))
 }
 
-generate_directories()
+generate_directories = function()
 {
   setwd("/home/cesandovalp/Documents/MDA/DM_Project")
   home.html = readLines("home.html")
