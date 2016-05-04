@@ -1,38 +1,28 @@
-main = function()
+main = function(document)
 {
-  document = c("/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/1.pdf",
-               "/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/2.pdf",
-               "/home/cristiansp/Documents/MDA/DM_Project/TF_IDF/Test/3.pdf")
-
   result1 = list()
   result2 = list()
 
   term = c()
-  tid = c()
+  tid  = c()
+
+  no_cores = detectCores() - 1
+  cl       = makeCluster(no_cores, type = "FORK")
+  result1  = parLapply(cl, document, pdf.vector)
 
   for( d in 1:length(document) )
   {
-    result1[[d]] = pdf.vector( document[d] )
     result2[[d]] = c(0)
-    term        = join.aux( term, result1[[d]] )
+    term         = join.aux( term, result1[[d]] )
   }
+
+#  stop(length(term))
 
   for( d in 1:length(result1) )
   {
-    for( t in 1:length(term) )
-    {
-      if( is.null(tid[t]) || is.na(tid[t]) ) { tid[t] = 0 }
-
-      if( is.na(result1[[d]][term[t]]) )
-      {
-        result2[[d]][term[t]] = 0
-      }else
-      {
-        result2[[d]][term[t]] = result1[[d]][term[t]]
-        tid[t] = tid[t] + 1
-      }
-    }
-    result2[[d]] = result2[[d]][-1]
+#    print(document[d])
+#    print(length(term))
+    result2[[d]][term[which(!term %in% names(document[d]))]] = 0
   }
 
   frequency_mat = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)

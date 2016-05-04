@@ -13,6 +13,8 @@ pdf.vector = function(path)
   data          = data$content
   review_text   = paste(data, collapse = " ")
   str_replace_all(review_text, "[^[:alnum:]]", " ")
+#  review_text   = gsub("\\b[a-zA-Z0-9]{1,3}\\b", "", review_text)
+#  review_text   = gsub("\\b[a-zA-Z0-9]{7,100}\\b", "", review_text)
 
   for( i in noise ) { review_text = gsub(i, " ", review_text) }
 
@@ -31,6 +33,9 @@ pdf.vector = function(path)
   result             = tolower(paste(review_subset, collapse = " "))
   result             = strsplit(result, split=" ")
   frequency_table    = table(result)
+  min_item           = min(frequency_table)
+  temp_index         = !names(frequency_table) %in% names(which(frequency_table == min_item))
+  frequency_table    = frequency_table[temp_index]
 
   frequency_table
 }
