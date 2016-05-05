@@ -18,14 +18,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // tf_idf
-NumericMatrix tf_idf(NumericMatrix raw_frequency, NumericVector tid);
-RcppExport SEXP TFIDF_tf_idf(SEXP raw_frequencySEXP, SEXP tidSEXP) {
+NumericMatrix tf_idf(NumericMatrix raw_freq, NumericVector tid, NumericVector max_freq);
+RcppExport SEXP TFIDF_tf_idf(SEXP raw_freqSEXP, SEXP tidSEXP, SEXP max_freqSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericMatrix >::type raw_frequency(raw_frequencySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type raw_freq(raw_freqSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tid(tidSEXP);
-    __result = Rcpp::wrap(tf_idf(raw_frequency, tid));
+    Rcpp::traits::input_parameter< NumericVector >::type max_freq(max_freqSEXP);
+    __result = Rcpp::wrap(tf_idf(raw_freq, tid, max_freq));
     return __result;
 END_RCPP
 }

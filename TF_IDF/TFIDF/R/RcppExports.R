@@ -5,7 +5,7 @@ k_means <- function(centroid, tf_idf) {
     .Call('TFIDF_k_means', PACKAGE = 'TFIDF', centroid, tf_idf)
 }
 
-tf_idf <- function(raw_frequency, tid) {
-    .Call('TFIDF_tf_idf', PACKAGE = 'TFIDF', raw_frequency, tid)
+tf_idf <- function(raw_freq, tid, max_freq) {
+    .Call('TFIDF_tf_idf', PACKAGE = 'TFIDF', raw_freq, tid, max_freq)
 }
 

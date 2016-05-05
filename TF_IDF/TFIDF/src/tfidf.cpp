@@ -19,24 +19,24 @@ _____FREQUENCY_____|_____TF-IDF______|_____Cosine_____
 **********************************************************/
 
 // tf(t,d) = the number of times that term t occurs in document d
-double tf(double raw_frequency);
+double tf(double raw_frequency, double max);
 // idf(t,D) = whether the term is common or rare across all documents
 double idf(int N, double tid);
 // Cosine similarity
 NumericMatrix cos_similarity(NumericMatrix tf_idf_mat);
 
 // [[Rcpp::export]]
-NumericMatrix tf_idf(NumericMatrix raw_frequency, NumericVector tid)
+NumericMatrix tf_idf(NumericMatrix raw_freq, NumericVector tid, NumericVector max_freq)
 {
-  NumericMatrix result(raw_frequency.nrow(), raw_frequency.ncol());
+  NumericMatrix result(raw_freq.nrow(), raw_freq.ncol());
 
   omp_set_num_threads(32);
   #pragma omp parallel for
-  for(int document = 0; document < raw_frequency.nrow(); ++document)
+  for(int doc = 0; doc < raw_freq.nrow(); ++doc)
   {
-    for(int term = 0; term < raw_frequency.ncol(); ++term)
+    for(int term = 0; term < raw_freq.ncol(); ++term)
     {
-      result(document, term) = tf(raw_frequency(document, term)) * idf(raw_frequency.nrow(), tid[term]);
+      result(doc, term) = tf(raw_freq(doc, term), max_freq[doc]) * idf(raw_freq.nrow(), tid[term]);
     }
   }
 
@@ -47,9 +47,9 @@ NumericMatrix tf_idf(NumericMatrix raw_frequency, NumericVector tid)
   return result;
 }
 
-double tf(double raw_frequency)
+double tf(double raw_frequency, double max)
 {
-  return raw_frequency == 0 ? 0 : 1 + log(raw_frequency);
+  return 0.5 + (0.5*raw_frequency)/max;
 }
 
 double idf(int N, double tid)
