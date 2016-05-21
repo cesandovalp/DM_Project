@@ -1,3 +1,6 @@
 useDynLib(TFIDF)
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
+import(stringr)
+import(tm)
+import(parallel)

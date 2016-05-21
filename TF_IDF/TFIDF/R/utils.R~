@@ -4,7 +4,7 @@ pdf.vector = function(path)
   noise   = c("[\t\n\r\f\b\v]+", "([0-9])", "\\.", "\\+", "\\-", "\\/",
               "\\*", "\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\,",
               "\\%", "\\&", "\\=", "\\?", "\\|", "\\!", "\\\\", "\\:",
-              "\\;", "<", ">", "`", "\\^", "~")
+              "\\;", "<", ">")
 
   read_function = readPDF()
   data          = read_function(elem=list(uri=path),language="en",id="id1")
@@ -13,6 +13,8 @@ pdf.vector = function(path)
   data          = data$content
   review_text   = paste(data, collapse = " ")
   str_replace_all(review_text, "[^[:alnum:]]", " ")
+#  review_text   = gsub("\\b[a-zA-Z0-9]{1,3}\\b", "", review_text)
+#  review_text   = gsub("\\b[a-zA-Z0-9]{7,100}\\b", "", review_text)
 
   for( i in noise ) { review_text = gsub(i, " ", review_text) }
 
@@ -118,7 +120,7 @@ generate_directories = function()
 
 generate.example_dirs = function()
 {
-  c("/home/cesandovalp/Documents/MDA/DM_Project/TF_IDF/Test/1.pdf",
-    "/home/cesandovalp/Documents/MDA/DM_Project/TF_IDF/Test/2.pdf",
-    "/home/cesandovalp/Documents/MDA/DM_Project/TF_IDF/Test/3.pdf")
+  c("~/Documents/MDA/DM_Project/TF_IDF/Test/1.pdf",
+    "~/Documents/MDA/DM_Project/TF_IDF/Test/2.pdf",
+    "~/Documents/MDA/DM_Project/TF_IDF/Test/3.pdf")
 }
