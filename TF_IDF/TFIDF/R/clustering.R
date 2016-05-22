@@ -14,6 +14,3 @@ test_pre = function()
 
   result
 }
-
-
-for( i in 1:length(documents) ) { txt.table(documents[i]) }
