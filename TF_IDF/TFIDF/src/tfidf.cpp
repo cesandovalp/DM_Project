@@ -31,7 +31,7 @@ NumericMatrix tf_idf(NumericMatrix raw_freq, NumericVector tid, NumericVector ma
   NumericMatrix result(raw_freq.nrow(), raw_freq.ncol());
 
   omp_set_num_threads(32);
-  //#pragma omp parallel for
+  #pragma omp parallel for
   for(int doc = 0; doc < raw_freq.nrow(); ++doc)
   {
     for(int term = 0; term < raw_freq.ncol(); ++term)

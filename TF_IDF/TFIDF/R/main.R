@@ -45,8 +45,6 @@ main = function(document)
 
   result2 = list()
 
-  print("2")
-
 #  print(result1[[1]][term])
 
   temp_fun = function(x)
@@ -64,7 +62,7 @@ main = function(document)
   result2  = parLapply(cl, result1, temp_fun)
   stopCluster(cl)
 
-  print("3")
+  print(result)
 
   tid = result2[[1]]
   print(max(result2[[1]]))
@@ -75,9 +73,7 @@ main = function(document)
 
   frequency_mat = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)
 
-  #tf_idf_mat = tf_idf(frequency_mat, tid, max_freq)
-
-  tf_idf_mat = 0
+  tf_idf_mat = tf_idf(frequency_mat, tid, max_freq)
 
   tf_idf_mat
 }
