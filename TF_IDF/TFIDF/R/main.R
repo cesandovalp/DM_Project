@@ -58,8 +58,10 @@ main = function(document)
 #    result[term[which(!term %in% names(x))]] = 0
 #    result[sort(names(result))]
   }
-  cl      = makeCluster(no_cores, type = "FORK")
-  result2 = parLapply(cl, result1, temp_fun)
+
+  no_cores = detectCores() - 1
+  cl       = makeCluster(no_cores, type = "FORK")
+  result2  = parLapply(cl, result1, temp_fun)
   stopCluster(cl)
 
   print("3")
