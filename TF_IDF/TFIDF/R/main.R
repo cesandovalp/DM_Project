@@ -39,6 +39,9 @@ calculate_all_terms = function(document)
 
 main = function(document)
 {
+  sw_path = system.file("extdata", "list_files.txt", package = "TFIDF")
+  document = readLines(sw_path)
+
   load("/home/cesandovalp/Documents/MDA/OUTPUT/documents.robject")
   load("/home/cesandovalp/Documents/MDA/OUTPUT/max_freq.robject")
   load("/home/cesandovalp/Documents/MDA/OUTPUT/term.robject")
@@ -62,7 +65,7 @@ main = function(document)
   result2  = parLapply(cl, result1, temp_fun)
   stopCluster(cl)
 
-  print(result)
+  print(result2)
 
   tid = result2[[1]]
   print(max(result2[[1]]))
