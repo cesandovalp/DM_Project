@@ -1,3 +1,15 @@
+txt.table = function(path)
+{
+  result             = readChar(path, file.info(path)$size)
+  result             = strsplit(result, split=" ")
+  frequency_table    = table(result)
+  min_item           = min(frequency_table)
+  temp_index         = !names(frequency_table) %in% names(which(frequency_table == min_item))
+  frequency_table    = frequency_table[temp_index]
+
+  frequency_table
+}
+
 pdf.vector = function(path)
 {
   sw_path = system.file("extdata", "stopwords", package = "TFIDF")
