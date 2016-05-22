@@ -7,10 +7,13 @@ test_pre = function()
 
   result = list()
 
-  for( i in documents )
+  for( i in 1:length(documents) )
   {
-    result[i] = txt.table(i)
+    result[i] = txt.table(documents[i])
   }
 
   result
 }
+
+
+for( i in 1:length(documents) ) { txt.table(documents[i]) }

@@ -8,7 +8,7 @@ calculate_frequency = function(document)
   result1  = list()
   no_cores = detectCores() - 1
   cl       = makeCluster(no_cores, type = "FORK")
-  result1  = parLapply(cl, document, pdf.vector)
+  result1  = parLapply(cl, document, txt.table)
 
   stopCluster(cl)
   
