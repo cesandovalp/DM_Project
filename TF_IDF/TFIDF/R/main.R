@@ -26,7 +26,7 @@ calculate_max_freq = function()
   save(max_freq, file="/home/cesandovalp/Documents/MDA/OUTPUT/max_freq.robject")
 }
 
-calculate_all_terms(document)
+calculate_all_terms = function(document)
 {
   load("/home/cesandovalp/Documents/MDA/OUTPUT/documents.robject")
 
