@@ -1,3 +1,6 @@
 library(TFIDF)
 
-print(main())
+a = main()
+
+cl <- kmeans(a, 6)
+

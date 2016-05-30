@@ -71,7 +71,7 @@ main = function()
 
   tf_idf_mat = tf_idf(frequency_mat, tid, max_freq)
 
-  #tf_idf_mat
+  tf_idf_mat
   #result2
-  tid
+  #tid
 }
