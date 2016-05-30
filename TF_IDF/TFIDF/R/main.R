@@ -37,7 +37,7 @@ calculate_all_terms = function(document)
   save(term, file="/home/cesandovalp/Documents/MDA/OUTPUT/term.robject")
 }
 
-main = function(document)
+main = function()
 {
   sw_path = system.file("extdata", "list_files.txt", package = "TFIDF")
   document = readLines(sw_path)
@@ -54,10 +54,6 @@ main = function(document)
   {
     x[setdiff(term, names(x))] = 0
     x
-#    x[term]
-#    result = replace(result, is.na(result), 0)
-#    result[term[which(!term %in% names(x))]] = 0
-#    result[sort(names(result))]
   }
 
   no_cores = detectCores() - 1
@@ -65,18 +61,17 @@ main = function(document)
   result2  = parLapply(cl, result1, temp_fun)
   stopCluster(cl)
 
-  print(result2)
+  print(length(result2))
 
-  tid = result2[[1]]
-  print(max(result2[[1]]))
-  print(max(result2[[2]]))
-  print(max(result2[[3]]))
+  tid = sapply(X=result2[[1]][term], FUN=function(x){ ifelse(x > 0, 1, 0)})
 
-  for(i in 2:length(document)) { tid = tid + result2[[i]]}
+  for(i in 2:length(document)) { tid = tid + sapply(X=result2[[i]][term], FUN=function(x){ ifelse(x > 0, 1, 0)})}
 
   frequency_mat = matrix(unlist(result2), nrow=length(document), ncol=length(term), byrow=TRUE)
 
   tf_idf_mat = tf_idf(frequency_mat, tid, max_freq)
 
-  tf_idf_mat
+  #tf_idf_mat
+  #result2
+  tid
 }
